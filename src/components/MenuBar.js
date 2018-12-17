@@ -10,9 +10,6 @@ class MenuBar extends React.Component {
 
           <form onSubmit={this.props.getMovieList}>
             <button>POPULAR</button>
-            <button>TOP RATED</button>
-            <button>UPCOMING</button>
-            <button>NOW PLAYING</button>
           </form>
         </div>
       </Router>
