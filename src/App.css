@@ -1,3 +1,71 @@
-MainPage {
+/* Fixed Width */
+.App {
+  margin-left: auto;
+  width: 1028px;
+  margin: 0 auto;
+  text-align: left;
   background-color: #313541;
+}
+
+/* Title Bar */
+.titleBar {
+  background-color: #313541;
+  display: block;
+  color: #000;
+  font-size: 24;
+  padding-left: 16;
+}
+
+/* SearchBox */
+.searchBox {
+  margin-left: 7px;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  background-color: transparent;
+}
+/* Button */
+.button-div .btn {
+  background-color: #00cca3;
+  height: 25px;
+  width: 110px;
+  font-size: 10px;
+}
+
+.App {
+  text-align: center;
+  color: #313541;
+}
+.App .link {
+  color: #fff;
+  text-decoration: underline;
+  font-size: 14px;
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,20 +1,17 @@
 import React, { Component } from "react";
-import "./App.css";
+import "D:/ThalesCode/FrontEndTest/motivo_frontend_test/src/App.css";
+import WatchMovie from "./WatchMovie.js";
 import $ from "jquery";
-import MovieBox from "./components/MovieBox.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "reactstrap";
 
-class App extends Component {
+class WatchList extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.displayAll();
   }
-  //Display movies using api key from TMDb
   displayAll() {
     const urlString =
-      "https://api.themoviedb.org/3/discover/movie?api_key=9b2369d7210e25238f707ddca60ddd85";
+      "https://api.themoviedb.org/3/discover/movie?api_key=4ccda7a34189fcea2fc752a6ee339500";
 
     $.ajax({
       url: urlString,
@@ -24,8 +21,8 @@ class App extends Component {
         var movieBoxes = [];
         results.forEach(movie => {
           movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
-          const movieBox = <MovieBox key={movie.id} movie={movie} />;
+          // console.log(movie.poster_path);
+          const movieBox = <WatchMovie key={movie.id} movie={movie} />;
           movieBoxes.push(movieBox);
         });
         this.setState({ rows: movieBoxes });
@@ -35,11 +32,9 @@ class App extends Component {
       }
     });
   }
-
-  //Search Movies
   performSearch(searchTerm) {
     const urlString =
-      "https://api.themoviedb.org/3/search/movie?api_key=9b2369d7210e25238f707ddca60ddd85&query=" +
+      "https://api.themoviedb.org/3/search/movie?api_key=4ccda7a34189fcea2fc752a6ee339500&query=" +
       searchTerm;
 
     $.ajax({
@@ -50,8 +45,8 @@ class App extends Component {
         var movieBoxes = [];
         results.forEach(movie => {
           movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
-          const movieBox = <MovieBox key={movie.id} movie={movie} />;
+          //console.log(movie.poster_path);
+          const movieBox = <WatchMovie key={movie.id} movie={movie} />;
           movieBoxes.push(movieBox);
         });
         this.setState({ rows: movieBoxes });
@@ -62,8 +57,10 @@ class App extends Component {
     });
   }
   searchChangeHandler(event) {
+    //console.log(event.target.value);
     const searchTerm = event.target.value;
     if (searchTerm.trim() === "") {
+      //console.log("empty here");
       this.displayAll();
     } else {
       this.performSearch(searchTerm);
@@ -75,34 +72,23 @@ class App extends Component {
         <table className="titleBar">
           <tbody>
             <tr>
-              <td>
-                <a className="link" href="">
-                  All Movies
-                </a>
-              </td>
+              <td>My WatchList</td>
             </tr>
           </tbody>
         </table>
+
         <input
-          className="searchBox"
           style={{
             fontSize: 14,
             display: "block",
-            width: "98%",
+            width: "100%",
             paddingTop: 8,
             paddingBottom: 8
           }}
           onChange={this.searchChangeHandler.bind(this)}
           placeholder="Search..."
         />
-        <br />
-
-        <div className="button-div">
-          <Button className="btn">POPULAR</Button>{" "}
-          <Button className="btn">TOP RATED</Button>{" "}
-          <Button className="btn">UPCOMING</Button>{" "}
-          <Button className="btn">NOW PLAYING</Button>{" "}
-        </div>
+        <hr />
         <div
           style={{
             position: "relative",
@@ -118,4 +104,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default WatchList;
