@@ -35,11 +35,13 @@ class MovieBox extends Component {
           float: "left"
         }}
       >
-        <div className="poster">
-          <img alt="poster" src={this.props.movie.poster} />
-          <div className="hoverText">
-            <strong>{this.props.movie.title}</strong>
-            <p>{this.props.movie.overview}</p>
+        <div className="poster-container">
+          <div className="poster">
+            <img alt="poster" src={this.props.movie.poster} />
+            <div className="hoverText">
+              <strong>{this.props.movie.title}</strong>
+              <p>{this.props.movie.overview}</p>
+            </div>
           </div>
         </div>
         <br />
