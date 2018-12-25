@@ -1,7 +1,11 @@
 /* Fixed Width */
+.silex-runtime .website-min-width {
+  min-width: 0;
+}
+
 .App {
   margin-left: auto;
-  width: 1028px;
+  width: 1042px;
   margin: 0 auto;
   text-align: left;
   background-color: #313541;
@@ -26,10 +30,15 @@
 }
 /* Button */
 .button-div .btn {
-  background-color: #00cca3;
+  background-color: #313541;
   height: 25px;
   width: 110px;
   font-size: 10px;
+  border-color: #00cca3;
+}
+
+.button-div .btn:hover {
+  background-color: #00cca3;
 }
 
 .App {
@@ -59,6 +68,33 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/*scroll bar*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #00cca3;
+}
+
+/*Track Piece*/
+::-webkit-scrollbar-track-piece {
+  background: #00cca3;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 @keyframes App-logo-spin {

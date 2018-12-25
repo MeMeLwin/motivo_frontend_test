@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Navigation from "./Navigation";
+import NaviLink from "./NaviLink";
 import App from "../App";
 import WatchList from "./WatchList";
 import "./SideBar.css";
@@ -11,7 +11,7 @@ class SideBar extends Component {
       <BrowserRouter>
         <div>
           <div className="sidenav">
-            <Navigation style={{ position: "fix" }} />
+            <NaviLink style={{ position: "fix" }} />
           </div>
           <div className="main">
             <Switch>

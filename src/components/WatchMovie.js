@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./MyWatchList.css";
 class WatchMovie extends Component {
   state = {};
   handleRemove(event) {
@@ -13,18 +14,49 @@ class WatchMovie extends Component {
       <div
         key={this.props.movie.id}
         style={{
-          width: 250,
+          width: 200,
           height: 400,
           paddingTop: 5,
           color: "white",
           float: "left"
         }}
       >
-        <img alt="poster" src={this.props.movie.poster} />
+        <div className="poster-container">
+          <div className="poster">
+            <img
+              id={this.props.movie.id}
+              alt="poster"
+              src={this.props.movie.poster}
+            />
+            <div className="hoverText">
+              <strong>{this.props.movie.title}</strong>
+              <p>{this.props.movie.overview}</p>
+            </div>
+          </div>
+        </div>
         <br />
-        {this.props.movie.title}
-        <br />
-        <button id={this.props.movie.id} onClick={this.handleRemove.bind(this)}>
+        <center>
+          <div className="title">
+            {this.props.movie.title}
+            <br />
+            <span id="genre" style={{ textAlign: "right" }}>
+              Genres:
+            </span>
+            <span id="g">Fantasy</span>
+            <span id="year" style={{ textAlign: "left" }}>
+              Year:
+            </span>
+            <span id="y">{this.props.movie.release_date}</span>
+          </div>
+        </center>
+        <center>
+          <div className="vote">{this.props.movie.vote_average}</div>
+        </center>
+        <button
+          className="removeBtn"
+          id={this.props.movie.id}
+          onClick={this.handleRemove.bind(this)}
+        >
           Remove
         </button>
       </div>

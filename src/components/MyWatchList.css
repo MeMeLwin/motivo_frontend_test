@@ -15,6 +15,7 @@
   color: #f5f9fc;
   font-size: 12px;
 }
+
 .poster {
   position: relative;
 }
@@ -27,27 +28,42 @@
   opacity: 0.5;
 }
 .title {
+  padding-top: 3px;
   text-align: left;
   height: 35px;
   max-width: 180px;
-  font-size: 14px;
+  font-size: 10px;
+  color: #00cca3;
 }
 .title span {
-  font-size: 10px;
+  font-size: 12px;
 }
+
 .title #genre,
 #year,
 #g,
 #y {
+  color: #00cca3;
   font-size: 9px;
 }
+
 .vote {
   background: #8091a5;
   border-radius: 5px;
   font-size: 18px;
-  height: 30px;
+  height: 25px;
   padding-left: 30px;
   padding-right: 30px;
   max-width: 180px;
   text-align: left;
+  color: #00cca3;
+}
+
+.removeBtn {
+  width: 180px;
+  height: 25px;
+  border-radius: 5px;
+  font-size: 12px;
+  background-color: #00cca3;
+  border-color: #00cca3;
 }

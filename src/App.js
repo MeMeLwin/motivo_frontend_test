@@ -211,7 +211,7 @@ class App extends Component {
 
         <div className="button-div">
           <Button
-            className="btn"
+            className="ui inverted teal button"
             onClick={this.displayPopularMovies.bind(this)}
           >
             POPULAR

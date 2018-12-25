@@ -11,7 +11,7 @@ class WatchList extends Component {
   }
   displayAll() {
     const urlString =
-      "https://api.themoviedb.org/3/discover/movie?api_key=4ccda7a34189fcea2fc752a6ee339500";
+      "https://api.themoviedb.org/3/movie/now_playing?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US&page=3";
 
     $.ajax({
       url: urlString,
@@ -72,22 +72,33 @@ class WatchList extends Component {
         <table className="titleBar">
           <tbody>
             <tr>
-              <td>My WatchList</td>
+              <td>
+                <a
+                  className="link"
+                  href="#"
+                  onClick={this.displayAll.bind(this)}
+                >
+                  My WatchList
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
 
         <input
+          className="searchBox"
           style={{
             fontSize: 14,
             display: "block",
-            width: "100%",
+            width: "98%",
             paddingTop: 8,
-            paddingBottom: 8
+            paddingBottom: 8,
+            color: "white"
           }}
           onChange={this.searchChangeHandler.bind(this)}
           placeholder="Search..."
         />
+
         <hr />
         <div
           style={{
