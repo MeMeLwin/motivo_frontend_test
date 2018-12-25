@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/motivo_frontend_test/static/js/runtime~main.2d44fcff.js"
   },
   {
-    "revision": "f1cc9cce12233f7d162d",
-    "url": "/motivo_frontend_test/static/js/main.f1cc9cce.chunk.js"
+    "revision": "7d0ec1fe584705bd2d00",
+    "url": "/motivo_frontend_test/static/js/main.7d0ec1fe.chunk.js"
   },
   {
     "revision": "765aac18f2fdd8235e5a",
     "url": "/motivo_frontend_test/static/js/1.765aac18.chunk.js"
   },
   {
-    "revision": "f1cc9cce12233f7d162d",
+    "revision": "7d0ec1fe584705bd2d00",
     "url": "/motivo_frontend_test/static/css/main.bd550fda.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/motivo_frontend_test/static/css/1.ff934958.chunk.css"
   },
   {
-    "revision": "740f4d6f14ca041080e9576cbbdb7c96",
+    "revision": "39e3a75d0bc020d2867769c139a95409",
     "url": "/motivo_frontend_test/index.html"
   }
 ];
