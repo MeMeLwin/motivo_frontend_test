@@ -177,7 +177,6 @@ class App extends Component {
   }
 
   render() {
-    let lgClose = () => this.setState({ lgShow: false });
     return (
       <div className="App">
         <table className="titleBar">
