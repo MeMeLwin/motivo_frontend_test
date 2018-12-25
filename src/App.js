@@ -9,7 +9,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
     this.displayPopularMovies();
     this.displayTopRatedMovies();
     this.displayUpcomingMovies();
@@ -178,6 +177,7 @@ class App extends Component {
   }
 
   render() {
+    let lgClose = () => this.setState({ lgShow: false });
     return (
       <div className="App">
         <table className="titleBar">

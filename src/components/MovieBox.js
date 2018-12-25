@@ -24,6 +24,7 @@ class MovieBox extends Component {
   }
   render() {
     //let genresList = JSON.stringify(this.props.movie.genres);
+
     return (
       <div
         key={this.props.movie.id}
