@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import $ from "jquery";
 import MovieBox from "./components/MovieBox.js";
+import SideBar from "./components/SideBar.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "reactstrap";
 
@@ -180,6 +181,7 @@ class App extends Component {
     let lgClose = () => this.setState({ lgShow: false });
     return (
       <div className="App">
+        <SideBar />
         <table className="titleBar">
           <tbody>
             <tr>
