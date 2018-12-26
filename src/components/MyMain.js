@@ -13,9 +13,6 @@ class MyMain extends Component {
         <div className="side_bar">
           <SideBar />
         </div>
-        <div className="app">
-          <App />
-        </div>
       </div>
     );
   }
