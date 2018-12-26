@@ -1,62 +1,93 @@
 import React, { Component } from "react";
-import $ from "jquery";
-import { FaBookmark } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
-import { Button } from "reactstrap";
 import "./MovieBox.css";
-
-//Inner Page of Movie
-const Modal = ({ handleClose, show, children }) => {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
-  return (
-    <div className={showHideClassName}>
-      <div className="modal-main">
-        <button onClick={handleClose}>Close</button>
-        <Button bsStyle="link" onClick={handleClose}>
-          Back to all movies
-        </Button>
-        <br />
-        {children}
-      </div>
-    </div>
-  );
-};
+import "./modal.css";
+import $ from "jquery";
+import { FaHeart } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
+import { FaChevronCircleLeft } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
+import { FaPlayCircle } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
 class MovieBox extends Component {
-  state = { items: [] };
+  state = {
+    watchlist: [],
+    items: [],
+    show: false,
+    showTrailer: false,
+    crew: [],
+    cast: [],
+    relatedMovies: [],
+    relatedMovieTitle: "",
+    backgroundsTitle: "",
+    backdrops: [],
+    trailer: [
+      {
+        key: "QMtHZGn1Ka4"
+      }
+    ],
+    detail: [
+      {
+        genres: [{ id: 18, name: "" }],
+        percent_class: ""
+      }
+    ]
+  };
 
-  constructor(props) {
-    super(props);
-    var watchMovies = { items: [] };
-    //this.state = { items: [] };
-  }
   handleAdd(event) {
     const id = event.target.id;
     this.addToWatchList(id);
   }
+  // add the movie to watchlist
   addToWatchList(id) {
-    console.log("add to watchList : " + id);
-    // var watchList = [];
-    // if (localStorage.getItem("watchList") !== null) {
-    //   watchList = localStorage.getItem("watchList");
-    // }
-    // watchList.concat(id);
-    // localStorage.setItem("watchList", watchList);
-    // console.log(localStorage.getItem("watchList").value);
+    var watchMovies;
+    watchMovies = {
+      id: id,
+      title: this.props.movie.title,
+      release_date: this.props.movie.release_date,
+      poster: this.props.movie.poster,
+      vote_average: this.props.movie.vote_average
+    };
+    var savedWatchlist = [];
+    savedWatchlist = JSON.parse(localStorage.getItem("watchlist"));
+    if (savedWatchlist) {
+      savedWatchlist.push(watchMovies);
+      savedWatchlist = this.getUnique(savedWatchlist, "id");
+      localStorage.setItem("watchlist", JSON.stringify(savedWatchlist));
+      this.setState({
+        watchlist: savedWatchlist
+      });
+    } else {
+      this.setState({
+        watchlist: watchMovies
+      });
+      localStorage.setItem("watchlist", JSON.stringify(watchMovies));
+    }
   }
+  // prevent watchlist from duplicating items
+  getUnique(arr, comp) {
+    const unique = arr
+      .map(e => e[comp])
 
-  //Movie Details for Modal Box
+      // store the keys of the unique objects
+      .map((e, i, final) => final.indexOf(e) === i && i)
+
+      // eliminate the dead keys & store unique objects
+      .filter(e => arr[e])
+      .map(e => arr[e]);
+
+    return unique;
+  }
+  //get the detail info of the movie
   movieDetail() {
     const urlString =
       "https://api.themoviedb.org/3/movie/" +
       this.props.movie.id +
-      "?api_key=9b2369d7210e25238f707ddca60ddd85&append_to_response=credits";
+      "?api_key=4ccda7a34189fcea2fc752a6ee339500&append_to_response=credits";
 
     $.ajax({
       url: urlString,
       success: searchResults => {
-        console.log("Movie data fetch success");
         var detail = searchResults;
         var time = detail.runtime;
         var hour = Math.trunc(time / 60);
@@ -90,23 +121,77 @@ class MovieBox extends Component {
       }
     });
   }
-
-  //Movie Trailer for Modal Box
-  movieTrailer() {
+  relatedMovie() {
     const urlString =
       "https://api.themoviedb.org/3/movie/" +
       this.props.movie.id +
-      "/videos?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US";
+      "/similar?api_key=4ccda7a34189fcea2fc752a6ee339500&language=en-US";
 
     $.ajax({
       url: urlString,
       success: searchResults => {
-        console.log("fetch data success");
+        var related = searchResults.results;
+        var relatedMovies = related;
+        if (relatedMovies.length > 3) {
+          relatedMovies = relatedMovies.slice(0, 3);
+        }
+        if (relatedMovies.length > 0) {
+          this.setState({ relatedMovieTitle: "Related Movies" });
+        }
+        relatedMovies.forEach(relatedMovie => {
+          relatedMovie.poster_path =
+            "https://image.tmdb.org/t/p/w185" + relatedMovie.poster_path;
+        });
+        this.setState({ relatedMovies: relatedMovies });
+      },
+      error: (xhr, status, err) => {
+        console.error("Failed to fetch data");
+      }
+    });
+  }
+  getBackgrounds() {
+    const urlString =
+      "https://api.themoviedb.org/3/movie/" +
+      this.props.movie.id +
+      "/images?api_key=4ccda7a34189fcea2fc752a6ee339500&language=ru-RU&include_image_language=ru,null";
+
+    $.ajax({
+      url: urlString,
+      success: searchResults => {
+        var backdrops = searchResults.posters;
+        if (backdrops.length > 4) {
+          backdrops = backdrops.slice(0, 4);
+        }
+        if (backdrops.length > 0) {
+          this.setState({ backgroundsTitle: "Backgrounds" });
+        }
+        backdrops.forEach(backdrop => {
+          backdrop.file_path =
+            "https://image.tmdb.org/t/p/w185" + backdrop.file_path;
+        });
+        this.setState({ backdrops: backdrops });
+      },
+      error: (xhr, status, err) => {
+        console.error("Failed to fetch data");
+      }
+    });
+  }
+  movieTrailer() {
+    const urlString =
+      "https://api.themoviedb.org/3/movie/" +
+      this.props.movie.id +
+      "/videos?api_key=4ccda7a34189fcea2fc752a6ee339500&language=en-US";
+
+    $.ajax({
+      url: urlString,
+      success: searchResults => {
         var movieTrailer = searchResults.results;
         var trailer = movieTrailer;
-        console.log(trailer[0].key);
-        trailer[0].key = "https://www.youtube.com/embed/" + movieTrailer[0].key;
-        this.setState({ trailer: trailer });
+        if (trailer.length > 0) {
+          trailer[0].key =
+            "https://www.youtube.com/embed/" + movieTrailer[0].key;
+          this.setState({ trailer: trailer });
+        }
       },
       error: (xhr, status, err) => {
         console.error("Failed to fetch data");
@@ -114,28 +199,31 @@ class MovieBox extends Component {
     });
   }
 
-  //Modal functions
   showModal = () => {
     this.movieDetail();
     this.movieTrailer();
+    this.relatedMovie();
+    this.getBackgrounds();
     this.setState({ show: true });
   };
 
   hideModal = () => {
-    $(".popup").hide();
-    $(".links").show();
     this.setState({ show: false });
   };
+  showModalTrailer = () => {
+    this.setState({ showTrailer: true });
+  };
 
+  hideModalTrailer = () => {
+    this.setState({ showTrailer: false });
+  };
   render() {
-    //let genresList = JSON.stringify(this.props.movie.genres);
-
     return (
       <div
         key={this.props.movie.id}
         style={{
-          width: 200,
-          height: 400,
+          width: 230,
+          height: 420,
           paddingTop: 25,
           color: "#00cca3",
           float: "left"
@@ -150,68 +238,167 @@ class MovieBox extends Component {
                 src={this.props.movie.poster}
               />
               <div className="bookmark-div">
-                <span>
+                <button className="icon-btn">
                   <FaBookmark />
-                  Bookmark
-                </span>
-                <span>
-                  <FaStar />
-                  add to watchList
-                </span>
+                </button>
+                <span>Bookmark </span>
                 <button
+                  className="icon-btn"
                   id={this.props.movie.id}
                   onClick={this.handleAdd.bind(this)}
                 >
-                  ADD
-                </button>
+                  <FaStar />
+                </button>{" "}
+                add to watchList
               </div>
 
               <div className="related-div">
-                <h4>Related Movies</h4>
+                <div className="modal-header" style={{ paddingLeft: 20 }}>
+                  <strong>{this.state.relatedMovieTitle}</strong>
+                  <br />
+                </div>
+                {this.state.relatedMovies.map(function(movie, index) {
+                  return (
+                    <div className="related-movie" key={index}>
+                      <img alt="poster" src={movie.poster_path} />
+                      <br />
+                      {movie.title}
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="modal-div2">
               <h2>
-                <strong>{this.props.movie.title}</strong>
+                <strong>
+                  <span className="green-text">{this.props.movie.title}</span>
+                </strong>
               </h2>
               <div>
-                  
-                <div className="wrapper">
-                  <div className="popup">
-                    <a href="#" class="close">
-                      X
-                    </a>
+                <div className="detail-top">
+                  <div className={this.state.detail[0].percent_class}>
+                    <span style={{ color: "#fff" }}>
+                      <strong>{this.state.detail[0].percent}</strong>
+                      <sup style={{ fontSize: 12 }}>&#37;</sup>
+                    </span>
+                    <div className="slice">
+                      <div className="bar" />
+                      <div className="fill" />
+                    </div>
+                  </div>
+                  <div className="links">
+                    <button
+                      className="trailer-btn"
+                      onClick={this.showModalTrailer}
+                    >
+                      <span className="green-text">
+                        <span style={{ fontSize: 32 }}>
+                          <FaPlayCircle />
+                        </span>
+                        <br />
+                        PlayTrailer
+                      </span>
+                    </button>
+                  </div>
+                  <div className="info-div">
+                    Genres:{" "}
+                    <span className="green-text">
+                      {this.state.detail[0].genres.map(g => g.name).join(", ")}
+                    </span>
+                    <br />
+                    Release Year:{" "}
+                    <span className="green-text">
+                      {this.state.detail[0].release_date}
+                    </span>
+                    <br />
+                    Duration:{" "}
+                    <span className="green-text">
+                      {this.state.detail[0].runtime}
+                    </span>
                   </div>
                 </div>
               </div>
-              <br /> <br /> <br />
+
               <hr />
               <div>
-                <h4>
+                <div className="modal-header" style={{ paddingBottom: 0 }}>
                   <strong>Overview</strong>
-                </h4>
+                </div>
+                <p className="overview">{this.state.detail[0].overview}</p>
               </div>
-              <h4>
-                <strong>Feature Crew</strong>
-              </h4>
-              ); })}
+              <div className="crew-div">
+                <div className="modal-header">
+                  <strong>Feature Crew</strong>
+                  <br />
+                </div>
+
+                {this.state.crew.map(function(crew, index) {
+                  return (
+                    <div key={index} className="crew">
+                      {crew.job} :{" "}
+                      <span className="green-text">{crew.name}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <hr />
+              <div className="modal-header">
+                <strong>Top Billed Cast</strong>
+                <br />
+              </div>
+              <div className="cast-div">
+                {this.state.cast.map(function(cast, index) {
+                  return (
+                    <div className="cast" key={index}>
+                      <img alt="profile" src={cast.profile_path} />
+                      <br />
+                      {cast.name}
+                      <br />
+                      <span className="green-text">{cast.character}</span>
+                    </div>
+                  );
+                })}
+              </div>
               <br />
               <hr />
-              <h4>
-                <strong>Top Billed Cast</strong>
-              </h4>
-              ); })}
+              <div className="modal-header">
+                <strong>{this.state.backgroundsTitle}</strong>
+                <br />
+              </div>
+              {this.state.backdrops.map(function(backdrop, index) {
+                return (
+                  <div className="backdrops" key={index}>
+                    <img alt="backgrounds" src={backdrop.file_path} />
+                  </div>
+                );
+              })}
             </div>
-          </Modal>
 
+            <TrailerModal
+              show={this.state.showTrailer}
+              handleCloseTrailer={this.hideModalTrailer}
+            >
+              <iframe
+                title={this.state.trailer[0].key}
+                src={this.state.trailer[0].key}
+                width="500"
+                height="400"
+                frameBorder="0"
+                allowFullScreen="allowFullScreen"
+              />
+            </TrailerModal>
+          </Modal>
           <div className="poster-container">
             <div className="poster">
-              <img
-                id={this.props.movie.id}
-                onClick={this.showModal}
-                alt="poster"
-                src={this.props.movie.poster}
-              />
+              <div className="movie-poster">
+                <img
+                  id={this.props.movie.id}
+                  onClick={this.showModal}
+                  alt="poster"
+                  src={this.props.movie.poster}
+                />
+              </div>
+
               <div className="hoverText">
                 <strong>{this.props.movie.title}</strong>
                 <p>{this.props.movie.overview}</p>
@@ -221,34 +408,79 @@ class MovieBox extends Component {
           <br />
           <center>
             <div className="title">
-              {this.props.movie.title}
+              <strong> {this.props.movie.title}</strong>
               <br />
-              <span id="genre" style={{ textAlign: "right" }}>
+              <span
+                id="genre"
+                style={{
+                  color: "#fff",
+                  textAlign: "left",
+                  letterSpacing: "0.2mm"
+                }}
+              >
                 Genres:
               </span>
-              <span id="g">Fantasy</span>
-              <span id="year" style={{ textAlign: "left" }}>
+              <span id="g">Science Fiction </span>
+              <span
+                style={{
+                  color: "#fff",
+                  textAlign: "left",
+                  letterSpacing: "0.2mm"
+                }}
+              >
                 Year:
               </span>
-              <span id="y">{this.props.movie.release_date}</span>
+              <span> {this.props.movie.release_date}</span>
             </div>
           </center>
           <center>
             <div className="vote">
-            <strong>{this.props.movie.vote_average}</strong>
-            <span className="icons">
+              <strong>{this.props.movie.vote_average}</strong>
+              <span className="icons">
                 <FaHeart />
                 <FaBookmark />
                 <FaStar />
-                </span>
+              </span>
             </div>
           </center>
-          <br />
+
           <br />
         </main>
       </div>
     );
   }
 }
+
+//Basic Modal Box
+const Modal = ({ handleClose, show, children }) => {
+  const showHideClassName = show ? "modal display-block" : "modal display-none";
+  return (
+    <div className={showHideClassName}>
+      <div className="modal-main">
+        <button className="back-btn" onClick={handleClose}>
+          <FaChevronCircleLeft />
+          Back
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+//Trailer Modal Box
+const TrailerModal = ({ handleCloseTrailer, show, children }) => {
+  const showHideClassName = show ? "modal display-block" : "modal display-none";
+  return (
+    <div className={showHideClassName}>
+      <div className="trailermodal-main">
+        <button onClick={handleCloseTrailer} style={{ background: "red" }}>
+          <FaTimes />
+        </button>
+        <br />
+        {children}
+      </div>
+    </div>
+  );
+};
 
 export default MovieBox;

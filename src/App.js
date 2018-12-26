@@ -1,146 +1,57 @@
 import React, { Component } from "react";
 import "./App.css";
-import $ from "jquery";
+import "./FontStyle.css";
+import { FaSistrix } from "react-icons/fa";
 import MovieBox from "./components/MovieBox.js";
-import "bootstrap/dist/css/bootstrap.min.css";
+import $ from "jquery";
 import { Button } from "reactstrap";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.displayPopularMovies();
-    this.displayTopRatedMovies();
-    this.displayUpcomingMovies();
-    this.displayNowPlayingMovies();
-    this.displayAll();
-  }
-  //Show All Movies using api key from TMDb
-  displayAll() {
-    const urlString =
-      "https://api.themoviedb.org/3/movie/popular?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US&page=3";
-
-    $.ajax({
-      url: urlString,
-      success: searchResults => {
-        console.log("fetch data success");
-        const results = searchResults.results;
-        var movieBoxes = [];
-        results.forEach(movie => {
-          movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
-          const movieBox = <MovieBox key={movie.id} movie={movie} />;
-          movieBoxes.push(movieBox);
-        });
-        this.setState({ rows: movieBoxes });
-      },
-      error: (xhr, status, err) => {
-        console.error("Failed to fetch data");
-      }
-    });
+    this.state = { rows: [], watchList: [] };
+    this.pageCnt = 1;
   }
 
-  //Show Popular Movies using api key from TMDb
-  displayPopularMovies() {
-    const urlString =
-      "https://api.themoviedb.org/3/movie/popular?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US&page=1";
-
-    $.ajax({
-      url: urlString,
-      success: searchResults => {
-        console.log("fetch data success");
-        const results = searchResults.results;
-        var movieBoxes = [];
-        results.forEach(movie => {
-          movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
-          const movieBox = <MovieBox key={movie.id} movie={movie} />;
-          movieBoxes.push(movieBox);
-        });
-        this.setState({ rows: movieBoxes });
-      },
-      error: (xhr, status, err) => {
-        console.error("Failed to fetch data");
-      }
-    });
+  componentDidMount() {
+    this.filterMovie("popular");
   }
+  // filter movies by popular, upcoming, now playing, top rated
+  filterMovie(searchTerm) {
+    var movieBoxes = [];
+    this.setState({ rows: [] });
+    for (let i = 1; i <= this.pageCnt; i++) {
+      movieBoxes = [];
+      const urlString =
+        "https://api.themoviedb.org/3/movie/" +
+        searchTerm +
+        "?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US&page=" +
+        i;
 
-  //Show Top Rated Movies using api key from TMDb
-  displayTopRatedMovies() {
-    const urlString =
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=9b2369d7210e25238f707ddca60ddd85";
-
-    $.ajax({
-      url: urlString,
-      success: searchResults => {
-        console.log("fetch data success");
-        const results = searchResults.results;
-        var movieBoxes = [];
-        results.forEach(movie => {
-          movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
-          const movieBox = <MovieBox key={movie.id} movie={movie} />;
-          movieBoxes.push(movieBox);
-        });
-        this.setState({ rows: movieBoxes });
-      },
-      error: (xhr, status, err) => {
-        console.error("Failed to fetch data");
-      }
-    });
+      $.ajax({
+        url: urlString,
+        //eslint-disable-next-line
+        success: searchResults => {
+          const results = searchResults.results;
+          results.forEach(movie => {
+            movie.poster =
+              "https://image.tmdb.org/t/p/w185" + movie.poster_path;
+            var date = movie.release_date.split("-");
+            movie.release_date = date[0];
+            const movieBox = <MovieBox key={movie.id} movie={movie} />;
+            movieBoxes.push(movieBox);
+          });
+          if (i === this.pageCnt) {
+            this.setState({ rows: movieBoxes });
+          }
+        },
+        error: (xhr, status, err) => {
+          console.error("Failed to fetch data");
+        }
+      });
+    }
   }
-
-  //Show Upcoming Movies using api key from TMDb
-  displayUpcomingMovies() {
-    const urlString =
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US&page=2";
-
-    $.ajax({
-      url: urlString,
-      success: searchResults => {
-        console.log("fetch data success");
-        const results = searchResults.results;
-        var movieBoxes = [];
-        results.forEach(movie => {
-          movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
-          const movieBox = <MovieBox key={movie.id} movie={movie} />;
-          movieBoxes.push(movieBox);
-        });
-        this.setState({ rows: movieBoxes });
-      },
-      error: (xhr, status, err) => {
-        console.error("Failed to fetch data");
-      }
-    });
-  }
-
-  //Show Now Playing Movies using api key from TMDb
-  displayNowPlayingMovies() {
-    const urlString =
-      "https://api.themoviedb.org/3/movie/now_playing?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US&page=1";
-
-    $.ajax({
-      url: urlString,
-      success: searchResults => {
-        console.log("fetch data success");
-        const results = searchResults.results;
-        var movieBoxes = [];
-        results.forEach(movie => {
-          movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
-          const movieBox = <MovieBox key={movie.id} movie={movie} />;
-          movieBoxes.push(movieBox);
-        });
-        this.setState({ rows: movieBoxes });
-      },
-      error: (xhr, status, err) => {
-        console.error("Failed to fetch data");
-      }
-    });
-  }
-
-  //Search Movies
+  // search movies by input keyword
   performSearch(searchTerm) {
     const urlString =
       "https://api.themoviedb.org/3/search/movie?api_key=9b2369d7210e25238f707ddca60ddd85&query=" +
@@ -149,12 +60,12 @@ class App extends Component {
     $.ajax({
       url: urlString,
       success: searchResults => {
-        console.log("fetch data success");
         const results = searchResults.results;
         var movieBoxes = [];
         results.forEach(movie => {
           movie.poster = "https://image.tmdb.org/t/p/w185" + movie.poster_path;
-
+          var date = movie.release_date.split("-");
+          movie.release_date = date[0];
           const movieBox = <MovieBox key={movie.id} movie={movie} />;
           movieBoxes.push(movieBox);
         });
@@ -165,17 +76,18 @@ class App extends Component {
       }
     });
   }
-
-  //Handler for performSearch
   searchChangeHandler(event) {
     const searchTerm = event.target.value;
     if (searchTerm.trim() === "") {
-      this.displayAll();
+      this.filterMovie("popular");
     } else {
       this.performSearch(searchTerm);
     }
   }
-
+  buttonHandler(event) {
+    const searchTerm = event.target.id;
+    this.filterMovie(searchTerm);
+  }
   render() {
     return (
       <div className="App">
@@ -183,17 +95,12 @@ class App extends Component {
           <tbody>
             <tr>
               <td>
-                <a
-                  className="link"
-                  href="#"
-                  onClick={this.displayAll.bind(this)}
-                >
-                  All Movies
-                </a>
+                <h6>All Movies</h6>
               </td>
             </tr>
           </tbody>
         </table>
+
         <input
           className="searchBox"
           style={{
@@ -207,38 +114,42 @@ class App extends Component {
           onChange={this.searchChangeHandler.bind(this)}
           placeholder="Search..."
         />
-        <br />
 
         <div className="button-div">
           <Button
             className="ui inverted teal button"
-            onClick={this.displayPopularMovies.bind(this)}
+            id="popular"
+            onClick={this.buttonHandler.bind(this)}
           >
             POPULAR
           </Button>{" "}
           <Button
             className="btn"
-            onClick={this.displayTopRatedMovies.bind(this)}
+            id="top_rated"
+            onClick={this.buttonHandler.bind(this)}
           >
             TOP RATED
           </Button>{" "}
           <Button
             className="btn"
-            onClick={this.displayUpcomingMovies.bind(this)}
+            id="upcoming"
+            onClick={this.buttonHandler.bind(this)}
           >
             UPCOMING
           </Button>{" "}
           <Button
             className="btn"
-            onClick={this.displayNowPlayingMovies.bind(this)}
+            id="now_playing"
+            onClick={this.buttonHandler.bind(this)}
           >
             NOW PLAYING
           </Button>{" "}
         </div>
+
         <div
           style={{
             position: "relative",
-            maxHeight: "550px",
+            maxHeight: "430px",
             overflowY: "scroll",
             overflowX: "hidden"
           }}
