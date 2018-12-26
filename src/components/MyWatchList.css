@@ -59,6 +59,13 @@
   color: #00cca3;
 }
 
+.icons{
+  color: #ffffff;
+  text-align: right;
+  padding-left: 50px;
+  font-size: 12px;
+}
+
 .removeBtn {
   width: 180px;
   height: 25px;

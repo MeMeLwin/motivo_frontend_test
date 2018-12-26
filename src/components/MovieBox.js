@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import $ from "jquery";
 import { FaBookmark } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { Button } from "reactstrap";
 import "./MovieBox.css";
 
@@ -233,7 +234,14 @@ class MovieBox extends Component {
             </div>
           </center>
           <center>
-            <div className="vote">{this.props.movie.vote_average}</div>
+            <div className="vote">
+            <strong>{this.props.movie.vote_average}</strong>
+            <span className="icons">
+                <FaHeart />
+                <FaBookmark />
+                <FaStar />
+                </span>
+            </div>
           </center>
           <br />
           <br />

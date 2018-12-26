@@ -26,6 +26,7 @@
   display: block;
   opacity: 0.5;
 }
+
 .title {
   text-align: left;
   height: 35px;
@@ -50,4 +51,11 @@
   padding-right: 30px;
   max-width: 180px;
   text-align: left;
+}
+
+.icons{
+  color: #ffffff;
+  text-align: right;
+  padding-left: 50px;
+  font-size: 12px;
 }

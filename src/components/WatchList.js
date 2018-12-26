@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "D:/ThalesCode/FrontEndTest/motivo_frontend_test/src/App.css";
+import "/home/aceplus/Desktop/REACT/motivo_frontend_test/src/App.css";
 import WatchMovie from "./WatchMovie.js";
 import $ from "jquery";
 

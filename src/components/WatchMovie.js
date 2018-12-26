@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import "./MyWatchList.css";
+import { FaBookmark } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 class WatchMovie extends Component {
   state = {};
   handleRemove(event) {
@@ -50,7 +53,14 @@ class WatchMovie extends Component {
           </div>
         </center>
         <center>
-          <div className="vote">{this.props.movie.vote_average}</div>
+          <div className="vote">
+          <strong>{this.props.movie.vote_average}</strong>
+          <span className="icons">
+              <FaHeart />
+              <FaBookmark />
+              <FaStar />
+          </span>
+          </div>
         </center>
         <button
           className="removeBtn"
