@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/motivo_frontend_test/static/css/main.074c20eb.chunk.css"
   },
   {
-    "revision": "ef4b72226d4834c0e3e0fa2ff79d4e4b",
+    "revision": "3aa5d8424e01222d86ccf5d7e1b3613d",
     "url": "/motivo_frontend_test/index.html"
   }
 ];
