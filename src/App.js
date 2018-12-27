@@ -146,10 +146,10 @@ class App extends Component {
           </Button>{" "}
         </div>
 
-        <div
+        <div className="movierow"
           style={{
             position: "relative",
-            maxHeight: "430px",
+            maxHeight: "100%",
             overflowY: "scroll",
             overflowX: "hidden"
           }}

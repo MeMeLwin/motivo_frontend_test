@@ -97,7 +97,8 @@ class WatchList extends Component {
         <div
           style={{
             position: "relative",
-            height: "520px",
+            maxWidth:"100%",
+            height: "560px",
             overflowY: "scroll",
             overflowX: "hidden"
           }}

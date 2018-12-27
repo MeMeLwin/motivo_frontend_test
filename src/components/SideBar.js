@@ -10,10 +10,11 @@ class SideBar extends Component {
     return (
       <BrowserRouter>
         <div>
+          <div className="main">
           <div className="sidenav">
             <NaviLink style={{ position: "fix" }} />
           </div>
-          <div className="main">
+
             <Switch>
               <Route path="/" component={App} exact />
               <Route path="/watchlist" component={WatchList} />
