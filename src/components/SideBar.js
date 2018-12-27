@@ -16,7 +16,7 @@ class SideBar extends Component {
           </div>
 
             <Switch>
-              <Route path="/" component={App} exact />
+              <Route path="/" component={App} exact="true" />
               <Route path="/watchlist" component={WatchList} />
             </Switch>
           </div>
