@@ -49,7 +49,7 @@ class MovieBox extends Component {
       vote_average: this.props.movie.vote_average
     };
     var savedWatchlist = [];
-    savedWatchlist = JSON.parse(localStorage.getItem("watchlist"));
+    savedWatchlist = Array.from(JSON.parse(localStorage.getItem("watchlist")));
     if (savedWatchlist) {
       savedWatchlist.push(watchMovies);
       savedWatchlist = this.getUnique(savedWatchlist, "id");

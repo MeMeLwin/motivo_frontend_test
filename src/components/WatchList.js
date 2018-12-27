@@ -24,7 +24,7 @@ class WatchList extends Component {
       watchlist = savedWatchlist;
       console.log("saved watchlist: " + savedWatchlist);
     }
-    watchlist.forEach(movie => {
+    Array.prototype.forEach.call(watchlist, movie => {
       const movieBox = (
         <WatchMovie
           displayWatchlist={this.displayWatchlist}
@@ -70,26 +70,25 @@ class WatchList extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <div className="watchlist-title-box">
-          My Watchlist
-          <hr />
-        </div>
+      <div id="watch-app" className="App">
+        <table className="titleBar">
+          <tbody>
+            <tr>
+              <td>
+                <h6>Watch List</h6>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
         <input
-          className="search-box"
+          className="searchBox"
           style={{
-            fontSize: 20,
+            fontSize: 14,
             display: "block",
-            width: "95%",
-            marginTop: 30,
-            marginBottom: 20,
-            borderTop: 0,
-            borderLeft: 0,
-            borderRight: 0,
-            borderBottom: "0.3px solid #8091A5",
-            marginLeft: "30px",
-            backgroundColor: "#262d40",
+            width: "98%",
+            paddingTop: 8,
+            paddingBottom: 8,
             color: "white"
           }}
           onChange={this.searchChangeHandler.bind(this)}
