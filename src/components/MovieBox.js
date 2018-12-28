@@ -388,12 +388,11 @@ class MovieBox extends Component {
               />
             </TrailerModal>
           </Modal>
-          <div className="poster-container">
+          <div className="poster-container" onClick={this.showModal}>
             <div className="poster">
               <div className="movie-poster">
                 <img
                   id={this.props.movie.id}
-                  onClick={this.showModal}
                   alt="poster"
                   src={this.props.movie.poster}
                 />

@@ -70,7 +70,7 @@ class WatchList extends Component {
   }
   render() {
     return (
-      <div id="watch-app" className="App">
+      <div className="App">
         <table className="titleBar">
           <tbody>
             <tr>
@@ -97,9 +97,8 @@ class WatchList extends Component {
         <div
           style={{
             position: "relative",
-            maxWidth:"100%",
-            height: "560px",
-            overflowY: "scroll",
+            height: "520px",
+            width:"100%",
             overflowX: "hidden"
           }}
         >

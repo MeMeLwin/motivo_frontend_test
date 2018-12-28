@@ -10,13 +10,13 @@ class SideBar extends Component {
     return (
       <BrowserRouter>
         <div>
+        <div className="sidenav">
+          <NaviLink style={{ position: "fix" }} />
+        </div>
           <div className="main">
-            <div className="sidenav">
-              <NaviLink style={{ position: "fix" }} />
-            </div>
-
             <Switch>
-              <Route path="/" component={() => <App />} />
+              <Route path="/" component={App} exact/>
+              <Route path="/motivo_frontend_test/" component={App} exact />
               <Route path="/watchlist" component={WatchList} />
             </Switch>
           </div>

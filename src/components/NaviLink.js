@@ -5,7 +5,7 @@ class NaviLink extends Component {
   render() {
     return (
       <div>
-        <NavLink exact to="/">
+        <NavLink to="/">
           <label style={{ paddingLeft: 3, fontSize: 17 }}>&#x2630;</label>
         </NavLink>
         <NavLink to="/watchlist">
