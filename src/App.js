@@ -85,6 +85,9 @@ class App extends Component {
     }
   }
   buttonHandler(event) {
+    this.setState({
+      bgColor:"#00cca3"
+    });
     const searchTerm = event.target.id;
     this.filterMovie(searchTerm);
   }
@@ -119,6 +122,7 @@ class App extends Component {
           <Button
             className="ui inverted teal button"
             id="popular"
+            style={{backgroundColor:this.state.bgColor}}
             onClick={this.buttonHandler.bind(this)}
           >
             POPULAR

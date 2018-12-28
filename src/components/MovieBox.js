@@ -49,11 +49,13 @@ class MovieBox extends Component {
       vote_average: this.props.movie.vote_average
     };
     var savedWatchlist = [];
-    savedWatchlist = Array.from(JSON.parse(localStorage.getItem("watchlist")));
+    if (localStorage.getItem("my_watchlist") !== null) {
+    savedWatchlist = Array.from(JSON.parse(localStorage.getItem("my_watchlist")));
+  }
     if (savedWatchlist) {
       savedWatchlist.push(watchMovies);
       savedWatchlist = this.getUnique(savedWatchlist, "id");
-      localStorage.setItem("watchlist", JSON.stringify(savedWatchlist));
+      localStorage.setItem("my_watchlist", JSON.stringify(savedWatchlist));
       this.setState({
         watchlist: savedWatchlist
       });
@@ -61,7 +63,7 @@ class MovieBox extends Component {
       this.setState({
         watchlist: watchMovies
       });
-      localStorage.setItem("watchlist", JSON.stringify(watchMovies));
+      localStorage.setItem("my_watchlist", JSON.stringify(watchMovies));
     }
   }
   // prevent watchlist from duplicating items
@@ -83,7 +85,7 @@ class MovieBox extends Component {
     const urlString =
       "https://api.themoviedb.org/3/movie/" +
       this.props.movie.id +
-      "?api_key=4ccda7a34189fcea2fc752a6ee339500&append_to_response=credits";
+      "?api_key=9b2369d7210e25238f707ddca60ddd85&append_to_response=credits";
 
     $.ajax({
       url: urlString,
