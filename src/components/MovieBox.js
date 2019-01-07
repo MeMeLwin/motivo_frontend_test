@@ -421,7 +421,7 @@ class MovieBox extends Component {
               >
                 Genres:
               </span>
-              <span id="g">Science Fiction </span>
+              <span id="g">Fantasy </span>
               <span
                 style={{
                   color: "#fff",
