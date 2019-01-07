@@ -50,8 +50,10 @@ class MovieBox extends Component {
     };
     var savedWatchlist = [];
     if (localStorage.getItem("my_watchlist") !== null) {
-    savedWatchlist = Array.from(JSON.parse(localStorage.getItem("my_watchlist")));
-  }
+      savedWatchlist = Array.from(
+        JSON.parse(localStorage.getItem("my_watchlist"))
+      );
+    }
     if (savedWatchlist) {
       savedWatchlist.push(watchMovies);
       savedWatchlist = this.getUnique(savedWatchlist, "id");
@@ -63,7 +65,8 @@ class MovieBox extends Component {
       this.setState({
         watchlist: watchMovies
       });
-      localStorage.setItem("my_watchlist", JSON.stringify(watchMovies));
+      savedWatchlist.push(watchMovies);
+      localStorage.setItem("my_watchlist", JSON.stringify(savedWatchlist));
     }
   }
   // prevent watchlist from duplicating items
