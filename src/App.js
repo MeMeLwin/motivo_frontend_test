@@ -84,13 +84,28 @@ class App extends Component {
       this.performSearch(searchTerm);
     }
   }
+
+
   buttonHandler(event) {
+
+    var yourBtn = this.state.buttonStatus;
+    var btnStyle = {
+		backgroundColor: 'gray'
+	}
+
+  if (yourBtn == 'clicked') {
+		btnStyle = {
+			backgroundColor: '#00cca3'
+		}
+	}
+
     this.setState({
-      backgroundColor: "#00cca3"
+      bgColor: "#00cca3"
     });
     const searchTerm = event.target.id;
     this.filterMovie(searchTerm);
   }
+  
   render() {
     return (
       <div className="App">
@@ -123,6 +138,7 @@ class App extends Component {
             className="ui inverted teal button"
             id="popular"
             onClick={this.buttonHandler.bind(this)}
+            style={{backgroundColor:this.state.bgColor}}
           >
             POPULAR
           </Button>{" "}
