@@ -48,16 +48,16 @@ class MovieBox extends Component {
       poster: this.props.movie.poster,
       vote_average: this.props.movie.vote_average
     };
-    var savedWatchlist = [];
-    if (localStorage.getItem("my_watchlist") !== null) {
-      savedWatchlist = Array.from(
-        JSON.parse(localStorage.getItem("my_watchlist"))
-      );
 
+    var savedWatchlist = [];
+    if (localStorage.getItem("mywatchlist") !== null) {
+      savedWatchlist = Array.from(
+        JSON.parse(localStorage.getItem("mywatchlist"))
+      );
       if (savedWatchlist) {
         savedWatchlist.push(watchMovies);
         savedWatchlist = this.getUnique(savedWatchlist, "id");
-        localStorage.setItem("my_watchlist", JSON.stringify(savedWatchlist));
+        localStorage.setItem("mywatchlist", JSON.stringify(savedWatchlist));
         this.setState({
           watchlist: savedWatchlist
         });
@@ -67,7 +67,7 @@ class MovieBox extends Component {
         watchlist: watchMovies
       });
       savedWatchlist.push(watchMovies);
-      localStorage.setItem("my_watchlist", JSON.stringify(savedWatchlist));
+      localStorage.setItem("mywatchlist", JSON.stringify(savedWatchlist));
     }
   }
   // prevent watchlist from duplicating items
@@ -131,7 +131,7 @@ class MovieBox extends Component {
     const urlString =
       "https://api.themoviedb.org/3/movie/" +
       this.props.movie.id +
-      "/similar?api_key=4ccda7a34189fcea2fc752a6ee339500&language=en-US";
+      "/similar?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US";
 
     $.ajax({
       url: urlString,
@@ -159,7 +159,7 @@ class MovieBox extends Component {
     const urlString =
       "https://api.themoviedb.org/3/movie/" +
       this.props.movie.id +
-      "/images?api_key=4ccda7a34189fcea2fc752a6ee339500&language=ru-RU&include_image_language=ru,null";
+      "/images?api_key=9b2369d7210e25238f707ddca60ddd85&language=ru-RU&include_image_language=ru,null";
 
     $.ajax({
       url: urlString,
@@ -186,7 +186,7 @@ class MovieBox extends Component {
     const urlString =
       "https://api.themoviedb.org/3/movie/" +
       this.props.movie.id +
-      "/videos?api_key=4ccda7a34189fcea2fc752a6ee339500&language=en-US";
+      "/videos?api_key=9b2369d7210e25238f707ddca60ddd85&language=en-US";
 
     $.ajax({
       url: urlString,

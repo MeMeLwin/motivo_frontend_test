@@ -19,7 +19,7 @@ class WatchList extends Component {
     var movieBoxes = [];
     var watchlist = [];
     var savedWatchlist = [];
-    savedWatchlist = JSON.parse(localStorage.getItem("my_watchlist"));
+    savedWatchlist = JSON.parse(localStorage.getItem("mywatchlist"));
     if (savedWatchlist) {
       watchlist = savedWatchlist;
       console.log("saved watchlist: " + savedWatchlist);
@@ -35,6 +35,7 @@ class WatchList extends Component {
       movieBoxes.push(movieBox);
     });
     this.setState({ rows: movieBoxes });
+    console.log("Finished Display watchlist:");
   }
   //search movies by input keyword
   performSearch(searchTerm) {
