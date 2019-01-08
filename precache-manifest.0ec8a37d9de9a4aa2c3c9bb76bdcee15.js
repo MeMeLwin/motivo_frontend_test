@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/motivo_frontend_test/static/js/runtime~main.2d44fcff.js"
   },
   {
-    "revision": "49e5f99d3d210a9af58e",
-    "url": "/motivo_frontend_test/static/js/main.49e5f99d.chunk.js"
+    "revision": "cd103c6c98e7b0a04592",
+    "url": "/motivo_frontend_test/static/js/main.cd103c6c.chunk.js"
   },
   {
     "revision": "2120cf382917366d6501",
     "url": "/motivo_frontend_test/static/js/1.2120cf38.chunk.js"
   },
   {
-    "revision": "49e5f99d3d210a9af58e",
+    "revision": "cd103c6c98e7b0a04592",
     "url": "/motivo_frontend_test/static/css/main.d90e06d2.chunk.css"
   },
   {
-    "revision": "fe628a6ed8fc98811d15b38fff5722d5",
+    "revision": "d4f0191f1d1b5a5d673cfeb4e61b8899",
     "url": "/motivo_frontend_test/index.html"
   }
 ];
