@@ -35,7 +35,7 @@ class WatchMovie extends Component {
   };
 
   handleRemove(event) {
-    const id = event.target.id;
+    var id = this.props.movie.id;
     this.removeMovie(id);
   }
   // remove the movie from watchlist
