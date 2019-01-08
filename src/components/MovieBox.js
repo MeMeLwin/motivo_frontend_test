@@ -53,14 +53,15 @@ class MovieBox extends Component {
       savedWatchlist = Array.from(
         JSON.parse(localStorage.getItem("my_watchlist"))
       );
-    }
-    if (savedWatchlist) {
-      savedWatchlist.push(watchMovies);
-      savedWatchlist = this.getUnique(savedWatchlist, "id");
-      localStorage.setItem("my_watchlist", JSON.stringify(savedWatchlist));
-      this.setState({
-        watchlist: savedWatchlist
-      });
+
+      if (savedWatchlist) {
+        savedWatchlist.push(watchMovies);
+        savedWatchlist = this.getUnique(savedWatchlist, "id");
+        localStorage.setItem("my_watchlist", JSON.stringify(savedWatchlist));
+        this.setState({
+          watchlist: savedWatchlist
+        });
+      }
     } else {
       this.setState({
         watchlist: watchMovies
