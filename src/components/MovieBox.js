@@ -35,7 +35,7 @@ class MovieBox extends Component {
   };
 
   handleAdd(event) {
-    const id = event.target.id;
+    var id = this.props.movie.id;
     this.addToWatchList(id);
   }
   // add the movie to watchlist
