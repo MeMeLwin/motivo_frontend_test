@@ -1,13 +1,13 @@
 {
   "main.css": "/motivo_frontend_test/static/css/main.d90e06d2.chunk.css",
-  "main.js": "/motivo_frontend_test/static/js/main.cd103c6c.chunk.js",
-  "main.js.map": "/motivo_frontend_test/static/js/main.cd103c6c.chunk.js.map",
+  "main.js": "/motivo_frontend_test/static/js/main.06ad4c3c.chunk.js",
+  "main.js.map": "/motivo_frontend_test/static/js/main.06ad4c3c.chunk.js.map",
   "static/js/1.2120cf38.chunk.js": "/motivo_frontend_test/static/js/1.2120cf38.chunk.js",
   "static/js/1.2120cf38.chunk.js.map": "/motivo_frontend_test/static/js/1.2120cf38.chunk.js.map",
   "runtime~main.js": "/motivo_frontend_test/static/js/runtime~main.2d44fcff.js",
   "runtime~main.js.map": "/motivo_frontend_test/static/js/runtime~main.2d44fcff.js.map",
   "static/css/main.d90e06d2.chunk.css.map": "/motivo_frontend_test/static/css/main.d90e06d2.chunk.css.map",
   "index.html": "/motivo_frontend_test/index.html",
-  "precache-manifest.0ec8a37d9de9a4aa2c3c9bb76bdcee15.js": "/motivo_frontend_test/precache-manifest.0ec8a37d9de9a4aa2c3c9bb76bdcee15.js",
+  "precache-manifest.02b11be6618491aded85e9ee2255a09d.js": "/motivo_frontend_test/precache-manifest.02b11be6618491aded85e9ee2255a09d.js",
   "service-worker.js": "/motivo_frontend_test/service-worker.js"
 }
