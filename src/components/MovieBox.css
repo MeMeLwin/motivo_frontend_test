@@ -90,7 +90,7 @@
   background: transparent;
   color: #50e3c2;
   border: none;
-  margin-right: 800px;
+  margin-right: 835px;
 }
 .modal .modal-main {
   position: relative;
@@ -217,9 +217,7 @@
   color: #ffffff;
   text-align: right;
 }
-hr {
-  border: 1px solid #50e3c2;
-}
+
 .related-div {
   padding-top: 40px;
 }
@@ -246,4 +244,12 @@ hr {
 .backdrops img {
   width: 250px;
   height: 190px;
+}
+
+hr {
+  border: 1px solid #00cca3;
+}
+
+.bookmark-div{
+  margin-top: 15px;
 }

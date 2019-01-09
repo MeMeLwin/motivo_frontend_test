@@ -87,25 +87,10 @@ class App extends Component {
 
 
   buttonHandler(event) {
-
-    var yourBtn = this.state.buttonStatus;
-    var btnStyle = {
-		backgroundColor: 'gray'
-	}
-
-  if (yourBtn == 'clicked') {
-		btnStyle = {
-			backgroundColor: '#00cca3'
-		}
-	}
-
-    this.setState({
-      bgColor: "#00cca3"
-    });
     const searchTerm = event.target.id;
     this.filterMovie(searchTerm);
   }
-  
+
   render() {
     return (
       <div className="App">

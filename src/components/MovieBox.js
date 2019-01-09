@@ -425,7 +425,7 @@ class MovieBox extends Component {
               >
                 Genres:
               </span>
-              <span id="g">Fantasy </span>
+              <span id="g">Fantasy,Sci-Fi </span>
               <span
                 style={{
                   color: "#fff",
@@ -435,7 +435,7 @@ class MovieBox extends Component {
               >
                 Year:
               </span>
-              <span> {this.props.movie.release_date}</span>
+              <span>{this.props.movie.release_date}</span>
             </div>
           </center>
           <center>
