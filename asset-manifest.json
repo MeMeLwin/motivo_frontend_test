@@ -1,13 +1,13 @@
 {
-  "main.css": "/motivo_frontend_test/static/css/main.57dd87c8.chunk.css",
-  "main.js": "/motivo_frontend_test/static/js/main.54928e89.chunk.js",
-  "main.js.map": "/motivo_frontend_test/static/js/main.54928e89.chunk.js.map",
+  "main.css": "/motivo_frontend_test/static/css/main.8d3c21a9.chunk.css",
+  "main.js": "/motivo_frontend_test/static/js/main.f659f155.chunk.js",
+  "main.js.map": "/motivo_frontend_test/static/js/main.f659f155.chunk.js.map",
   "static/js/1.2120cf38.chunk.js": "/motivo_frontend_test/static/js/1.2120cf38.chunk.js",
   "static/js/1.2120cf38.chunk.js.map": "/motivo_frontend_test/static/js/1.2120cf38.chunk.js.map",
   "runtime~main.js": "/motivo_frontend_test/static/js/runtime~main.2d44fcff.js",
   "runtime~main.js.map": "/motivo_frontend_test/static/js/runtime~main.2d44fcff.js.map",
-  "static/css/main.57dd87c8.chunk.css.map": "/motivo_frontend_test/static/css/main.57dd87c8.chunk.css.map",
+  "static/css/main.8d3c21a9.chunk.css.map": "/motivo_frontend_test/static/css/main.8d3c21a9.chunk.css.map",
   "index.html": "/motivo_frontend_test/index.html",
-  "precache-manifest.6458a1f164c389251da3d5139ea84048.js": "/motivo_frontend_test/precache-manifest.6458a1f164c389251da3d5139ea84048.js",
+  "precache-manifest.f28adacfaf53b944a9aa71841c3bb1a8.js": "/motivo_frontend_test/precache-manifest.f28adacfaf53b944a9aa71841c3bb1a8.js",
   "service-worker.js": "/motivo_frontend_test/service-worker.js"
 }
